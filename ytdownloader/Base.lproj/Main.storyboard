@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Url Input-->
+        <!--URL Input-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="YTUrlInput" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" userLabel="URL Input" customClass="YTUrlInputVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -30,14 +30,20 @@
                                     <action selector="sendVideoId:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qK3-xd-AdN"/>
                                 </connections>
                             </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q2A-Na-EIK">
+                                <rect key="frame" x="52" y="323" width="310" height="2"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="28x-96-6lo" firstAttribute="trailing" secondItem="Qps-Pk-7gK" secondAttribute="trailing" id="3e3-5R-Ade"/>
+                            <constraint firstItem="q2A-Na-EIK" firstAttribute="trailing" secondItem="Qps-Pk-7gK" secondAttribute="trailing" id="55g-1g-DDV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Qps-Pk-7gK" secondAttribute="trailing" constant="148" id="5xm-jO-H0I"/>
                             <constraint firstItem="Qps-Pk-7gK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="129" id="6bh-MN-fhv"/>
                             <constraint firstItem="Qps-Pk-7gK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ChR-Mk-bMW"/>
+                            <constraint firstItem="Qps-Pk-7gK" firstAttribute="top" secondItem="q2A-Na-EIK" secondAttribute="bottom" constant="32" id="bcD-kq-1pQ"/>
                             <constraint firstItem="28x-96-6lo" firstAttribute="leading" secondItem="Qps-Pk-7gK" secondAttribute="leading" id="euv-Bh-yUB"/>
+                            <constraint firstItem="q2A-Na-EIK" firstAttribute="leading" secondItem="Qps-Pk-7gK" secondAttribute="leading" id="iW9-9W-fPJ"/>
                             <constraint firstItem="28x-96-6lo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iva-K4-POu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Qps-Pk-7gK" secondAttribute="trailing" constant="32" id="lX4-yg-rBV"/>
                             <constraint firstItem="Qps-Pk-7gK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="mY4-y6-uw0"/>
@@ -57,12 +63,61 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="downloadProgressView" destination="q2A-Na-EIK" id="HHk-KY-w75"/>
                         <outlet property="youtubeUrlField" destination="Qps-Pk-7gK" id="V8R-yy-Jfr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="340" y="418"/>
+            <point key="canvasLocation" x="370" y="417.75"/>
+        </scene>
+        <!--Video Preview-->
+        <scene sceneID="Tjw-20-pWu">
+            <objects>
+                <viewController storyboardIdentifier="videoPreviewViewController" id="SAC-Nb-DBZ" userLabel="Video Preview" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jr9-nz-aeO"/>
+                        <viewControllerLayoutGuide type="bottom" id="W7B-2H-box"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="inw-Lb-6Eu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lWo-3a-1Nf">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="284"/>
+                                </variation>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6F-hf-3KJ">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="145" y="405" width="61" height="21"/>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="lWo-3a-1Nf"/>
+                                <exclude reference="d6F-hf-3KJ"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular">
+                            <mask key="subviews">
+                                <include reference="lWo-3a-1Nf"/>
+                                <include reference="d6F-hf-3KJ"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dUx-Cp-hCk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="912" y="417.75"/>
         </scene>
     </scenes>
 </document>

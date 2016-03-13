@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YTGetVideoProps.h"
 
-@interface YTUrlInput : UIViewController <UITextFieldDelegate>
+@interface YTUrlInputVC : UIViewController <UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *youtubeUrlField;
-
 @end
