@@ -7,7 +7,7 @@
 //
 
 #import "YTGetVideoProps.h"
-#import "YTVideoModel.h"
+#import "YTVideoDataModel.h"
 #import "YTURLPaths.h"
 #import <AFNetworking.h>
 
@@ -30,10 +30,12 @@
     {
         NSDictionary *videoResponseObject = [responseObject objectForKey:@"data"];
         
-        YTVideoModel *videoModel = [[YTVideoModel alloc] init];
-        videoModel.video_file = [NSURL URLWithString: [[videoResponseObject valueForKey:@"video_file"] objectAtIndex:0]];
-        videoModel.video_thumbnail = [[videoResponseObject valueForKey:@"video_file"] objectAtIndex:0];
-        videoModel.video_title = [[videoResponseObject valueForKey:@"video_title"] objectAtIndex: 0];
+        
+        
+//        YTVideoModel *videoModel = [[YTVideoModel alloc] init];
+//        videoModel.video_file = [NSURL URLWithString: [[videoResponseObject valueForKey:@"video_file"] objectAtIndex:0]];
+//        videoModel.video_thumbnail = [[videoResponseObject valueForKey:@"video_file"] objectAtIndex:0];
+//        videoModel.video_title = [[videoResponseObject valueForKey:@"video_title"] objectAtIndex: 0];
         
         completion(YES);
         

@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface YTGetVideoProps : NSObject
 
 @property (nonatomic) NSString *percentageOfFileDownloaded;
+
 - (void)getVideoWithID:(NSString *)videoId completion:(void (^)(BOOL success))completion;
 
 @end

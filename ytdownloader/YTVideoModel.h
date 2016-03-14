@@ -9,8 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface YTVideoModel : NSObject
-@property (nonatomic) NSURL *video_file;
-@property (nonatomic) NSURL *video_thumbnail;
-@property (nonatomic) NSString *video_title;
+@property (strong) NSURL *video_file;
+@property (strong) NSURL *video_thumbnail;
+@property (strong) NSString *video_title;
+
+//-(id)init;
++(id)initWithTitle: (NSString *)aVideoTitle videoFile:(NSURL *)aVideoFile videoThumb: (NSURL *)aVideoThumbnail;
 
 @end

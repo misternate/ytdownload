@@ -7,8 +7,10 @@
 //
 
 #import "YTVideoPreviewVC.h"
+#import "YTVideoModel.h"
 
 @interface YTVideoPreviewVC ()
+@property (strong, nonatomic) IBOutlet UILabel *videoTitle;
 
 @end
 
@@ -16,6 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
     // Do any additional setup after loading the view.
 }
 

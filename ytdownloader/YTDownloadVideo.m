@@ -7,14 +7,15 @@
 //
 
 #import "YTDownloadVideo.h"
-#import "YTVideoModel.h"
+#import "YTVideoDataModel.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AFNetworking.h>
 
 @implementation YTDownloadVideo
 
 -(void)downloadVideo{
-    YTVideoModel *videoModel = [[YTVideoModel alloc] init];
+    
+    YTVideoDataModel *videoModel = [YTVideoDataModel getInstance];
     
     NSString *videoFilePath = [[videoModel valueForKey:@"video_file"] firstObject];
     

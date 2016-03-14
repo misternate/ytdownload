@@ -74,7 +74,7 @@
         <!--Video Preview-->
         <scene sceneID="Tjw-20-pWu">
             <objects>
-                <viewController storyboardIdentifier="videoPreviewViewController" id="SAC-Nb-DBZ" userLabel="Video Preview" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="videoPreviewViewController" id="SAC-Nb-DBZ" userLabel="Video Preview" customClass="YTVideoPreviewVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jr9-nz-aeO"/>
                         <viewControllerLayoutGuide type="bottom" id="W7B-2H-box"/>
@@ -89,31 +89,46 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="284"/>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6F-hf-3KJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="video_title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6F-hf-3KJ">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="145" y="405" width="61" height="21"/>
+                                    <rect key="frame" x="20" y="298" width="78" height="21"/>
                                 </variation>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCw-qX-WMl">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="526" width="46" height="30"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="BYZ-38-t0r" kind="show" id="EbI-Fo-Z9K"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="lWo-3a-1Nf"/>
                                 <exclude reference="d6F-hf-3KJ"/>
+                                <exclude reference="yCw-qX-WMl"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
                             <mask key="subviews">
                                 <include reference="lWo-3a-1Nf"/>
                                 <include reference="d6F-hf-3KJ"/>
+                                <include reference="yCw-qX-WMl"/>
                             </mask>
                         </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="videoTitle" destination="d6F-hf-3KJ" id="ovv-Ws-If8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dUx-Cp-hCk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

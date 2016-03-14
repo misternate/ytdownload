@@ -10,5 +10,7 @@
 #import "YTGetVideoProps.h"
 
 @interface YTUrlInputVC : UIViewController <UITextFieldDelegate>
+
 @property (strong, nonatomic) IBOutlet UITextField *youtubeUrlField;
+
 @end

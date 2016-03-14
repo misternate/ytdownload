@@ -7,7 +7,6 @@
 //
 
 #import "YTUrlInputVC.h"
-//#import "YTGetVideo.h"
 #import <Photos/Photos.h>
 #import <AFNetworking.h>
 #import <AssetsLibrary/AssetsLibrary.h>
@@ -77,13 +76,6 @@
     }
 }
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
-    if (object == self.ytGetVideo && [keyPath isEqualToString:@"percentageOfFileDownloaded"]) {
-        float percentage = [keyPath isEqualToString:@"percentageOfFileDownloaded"];
-        NSLog(@"file download percentage: %f", percentage);
-    }
-}
-
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     self.youtubeUrlField.text = @"";
     self.youtubeUrlField.placeholder = @"";
@@ -95,7 +87,8 @@
     //[getVideoManager getVideoWithID:self.youtubeUrlField.text];
     if(self.youtubeUrlField.text.length > 0)
     {
-        [getVideoManager getVideoWithID:self.youtubeUrlField.text completion:^(BOOL success) {
+        [getVideoManager getVideoWithID:self.youtubeUrlField.text completion:^(BOOL success)
+        {
             if(success)
             {
                 //
@@ -106,7 +99,7 @@
             }
             else
             {
-                NSLog(@"getting video properties failed!");
+                NSLog(@"Error getting video properties!");
             }
         }];
     }
