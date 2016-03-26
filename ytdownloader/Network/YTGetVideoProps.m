@@ -9,6 +9,8 @@
 #import "YTGetVideoProps.h"
 #import "YTVideoDataModel.h"
 #import "YTURLPaths.h"
+#import "YTDownloadVideo.h"
+
 #import <AFNetworking.h>
 
 @implementation YTGetVideoProps
@@ -28,8 +30,9 @@
     
     [manager GET:youtubeVideoIdUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
-        NSDictionary *videoResponseObject = [responseObject objectForKey:@"data"];
-        
+        NSDictionary *videoResponseObject = [[responseObject objectForKey:@"data"] objectAtIndex:0];
+        YTVideoDataModel *videoDataModel = [YTVideoDataModel getInstance];
+        [videoDataModel setVideoModel:videoResponseObject];
         
         
 //        YTVideoModel *videoModel = [[YTVideoModel alloc] init];

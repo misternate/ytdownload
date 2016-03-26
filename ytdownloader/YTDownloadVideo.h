@@ -10,4 +10,6 @@
 
 @interface YTDownloadVideo : NSObject
 
+-(void)downloadVideo;
+
 @end

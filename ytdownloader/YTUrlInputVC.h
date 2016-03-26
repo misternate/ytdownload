@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <JVFloatLabeledTextField.h>
 #import "YTGetVideoProps.h"
 
 @interface YTUrlInputVC : UIViewController <UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *youtubeUrlField;
+-(void)updateUrlField: (NSString*)updatedStringValue;
 
 @end

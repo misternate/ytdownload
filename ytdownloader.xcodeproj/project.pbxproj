@@ -15,12 +15,12 @@
 		439CA6161C71116B004BEEB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CA6151C71116B004BEEB4 /* main.m */; };
 		439CA6191C71116B004BEEB4 /* YTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CA6181C71116B004BEEB4 /* YTAppDelegate.m */; };
 		439CA61F1C71116B004BEEB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439CA61D1C71116B004BEEB4 /* Main.storyboard */; };
-		439CA6211C71116B004BEEB4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 439CA6201C71116B004BEEB4 /* Assets.xcassets */; };
 		439CA6241C71116B004BEEB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439CA6221C71116B004BEEB4 /* LaunchScreen.storyboard */; };
 		439CA62F1C71116B004BEEB4 /* ytdownloaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CA62E1C71116B004BEEB4 /* ytdownloaderTests.m */; };
 		439CA63A1C71116B004BEEB4 /* ytdownloaderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CA6391C71116B004BEEB4 /* ytdownloaderUITests.m */; };
 		439CA6491C711386004BEEB4 /* YTUrlInputVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CA6481C711386004BEEB4 /* YTUrlInputVC.m */; };
 		439CA64D1C7116E7004BEEB4 /* YTGetVideoProps.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CA64C1C7116E7004BEEB4 /* YTGetVideoProps.m */; };
+		43EBEAEE1CA1864100F78466 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43EBEAED1CA1864100F78466 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +55,6 @@
 		439CA6171C71116B004BEEB4 /* YTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YTAppDelegate.h; sourceTree = "<group>"; };
 		439CA6181C71116B004BEEB4 /* YTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YTAppDelegate.m; sourceTree = "<group>"; };
 		439CA61E1C71116B004BEEB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		439CA6201C71116B004BEEB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		439CA6231C71116B004BEEB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		439CA6251C71116B004BEEB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		439CA62A1C71116B004BEEB4 /* ytdownloaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ytdownloaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +67,7 @@
 		439CA6481C711386004BEEB4 /* YTUrlInputVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTUrlInputVC.m; sourceTree = "<group>"; };
 		439CA64B1C7116E7004BEEB4 /* YTGetVideoProps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YTGetVideoProps.h; path = Network/YTGetVideoProps.h; sourceTree = "<group>"; };
 		439CA64C1C7116E7004BEEB4 /* YTGetVideoProps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YTGetVideoProps.m; path = Network/YTGetVideoProps.m; sourceTree = "<group>"; };
+		43EBEAED1CA1864100F78466 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C17ED8E70F1188565251EB2 /* Pods-ytdownloader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ytdownloader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ytdownloader/Pods-ytdownloader.debug.xcconfig"; sourceTree = "<group>"; };
 		F5AEE03B1303A77300D8C216 /* libPods-ytdownloader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ytdownloader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -156,9 +156,9 @@
 				439CA6181C71116B004BEEB4 /* YTAppDelegate.m */,
 				439CA64A1C7113FB004BEEB4 /* App */,
 				439CA61D1C71116B004BEEB4 /* Main.storyboard */,
-				439CA6201C71116B004BEEB4 /* Assets.xcassets */,
 				439CA6221C71116B004BEEB4 /* LaunchScreen.storyboard */,
 				439CA6251C71116B004BEEB4 /* Info.plist */,
+				43EBEAED1CA1864100F78466 /* Assets.xcassets */,
 				439CA6141C71116B004BEEB4 /* Supporting Files */,
 			);
 			path = ytdownloader;
@@ -327,7 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				439CA6241C71116B004BEEB4 /* LaunchScreen.storyboard in Resources */,
-				439CA6211C71116B004BEEB4 /* Assets.xcassets in Resources */,
+				43EBEAEE1CA1864100F78466 /* Assets.xcassets in Resources */,
 				439CA61F1C71116B004BEEB4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

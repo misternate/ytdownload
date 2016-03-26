@@ -7,7 +7,8 @@
 //
 
 #import "YTURLPaths.h"
-
+//172.27.5.24
+//192.168.0.254
 @implementation YTURLPaths
 NSString * const YOUTUBE_GETVIDEO_URL = @"http://192.168.0.254/ytdownload/getvideo.php?videoid=";
 

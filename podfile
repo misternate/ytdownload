@@ -3,4 +3,8 @@ target 'ytdownloader' do
   pod 'ReactiveCocoa', '~> 2.5.0'
   pod 'JSONModel'
   pod 'MBProgressHUD', '~> 0.9.2'
+  pod 'SDWebImage', '~> 3.7'
+  pod 'JVFloatLabeledTextField', '~> 1.1'
+  pod 'Masonry', '~> 0.6'
+  pod 'IQKeyboardManager'
 end

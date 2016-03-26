@@ -7,10 +7,12 @@
 //
 
 #import "YTVideoPreviewVC.h"
-#import "YTVideoModel.h"
+#import "YTVideoDataModel.h"
+#import <UIImageView+WebCache.h>
 
 @interface YTVideoPreviewVC ()
 @property (strong, nonatomic) IBOutlet UILabel *videoTitle;
+@property (strong, nonatomic) IBOutlet UIImageView *videoThumbnail;
 
 @end
 
@@ -18,7 +20,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    YTVideoDataModel *videoDataModel = [YTVideoDataModel getInstance];
+    self.videoTitle.text = [[videoDataModel getVideoModel] valueForKey:@"video_title"];
+    [self.videoThumbnail sd_setImageWithURL:[[videoDataModel getVideoModel] valueForKey:@"video_thumbnail"] placeholderImage:nil];
     
     // Do any additional setup after loading the view.
 }

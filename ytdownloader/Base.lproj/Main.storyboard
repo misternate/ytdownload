@@ -18,52 +18,222 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qps-Pk-7gK">
-                                <rect key="frame" x="52" y="357" width="310" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28x-96-6lo">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28x-96-6lo">
                                 <rect key="frame" x="184" y="410" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Download">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="sendVideoId:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qK3-xd-AdN"/>
                                 </connections>
                             </button>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="q2A-Na-EIK">
-                                <rect key="frame" x="52" y="323" width="310" height="2"/>
-                            </progressView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qps-Pk-7gK">
+                                <rect key="frame" x="52" y="357" width="310" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="c6Z-OS-zN8">
+                                        <variation key="heightClass=regular" constant="64"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="vQ1-il-uXz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="c6Z-OS-zN8"/>
+                                        <exclude reference="vQ1-il-uXz"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="c6Z-OS-zN8"/>
+                                        <include reference="vQ1-il-uXz"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Na-dt-jKg">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="enter a">
+                                        <attributes>
+                                            <color key="NSColor" red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="10" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="10" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="youtu.be">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="10" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="10" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="or">
+                                        <attributes>
+                                            <color key="NSColor" red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="10" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="10" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="youtube.com">
+                                        <attributes>
+                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="10" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content=" ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.9137254901960784" green="0.9137254901960784" blue="0.9137254901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="10" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                    <fragment content="link ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.85490196078431369" green="0.85490196078431369" blue="0.85490196078431369" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="10" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's the YouTube link?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQr-PC-qLf">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
+                                </accessibility>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular" fixedFrame="YES">
+                                    <rect key="frame" x="14" y="270" width="302" height="48"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="3Na-dt-jKg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="87" id="2qK-r1-Gak">
+                                <variation key="heightClass=regular" constant="72"/>
+                            </constraint>
                             <constraint firstItem="28x-96-6lo" firstAttribute="trailing" secondItem="Qps-Pk-7gK" secondAttribute="trailing" id="3e3-5R-Ade"/>
-                            <constraint firstItem="q2A-Na-EIK" firstAttribute="trailing" secondItem="Qps-Pk-7gK" secondAttribute="trailing" id="55g-1g-DDV"/>
+                            <constraint firstItem="3Na-dt-jKg" firstAttribute="centerX" secondItem="Qps-Pk-7gK" secondAttribute="centerX" id="5IE-3q-ppL">
+                                <variation key="heightClass=regular" constant="0.0"/>
+                            </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="Qps-Pk-7gK" secondAttribute="trailing" constant="148" id="5xm-jO-H0I"/>
                             <constraint firstItem="Qps-Pk-7gK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="129" id="6bh-MN-fhv"/>
+                            <constraint firstAttribute="trailing" secondItem="Qps-Pk-7gK" secondAttribute="trailing" id="Brr-Aw-IH4"/>
                             <constraint firstItem="Qps-Pk-7gK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ChR-Mk-bMW"/>
-                            <constraint firstItem="Qps-Pk-7gK" firstAttribute="top" secondItem="q2A-Na-EIK" secondAttribute="bottom" constant="32" id="bcD-kq-1pQ"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3Na-dt-jKg" secondAttribute="bottom" constant="317" id="GIy-CY-QgN"/>
+                            <constraint firstItem="Qps-Pk-7gK" firstAttribute="centerX" secondItem="28x-96-6lo" secondAttribute="centerX" id="Goq-MD-B6r">
+                                <variation key="heightClass=regular" constant="-120.5"/>
+                            </constraint>
+                            <constraint firstItem="Qps-Pk-7gK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="32" id="Hr7-8H-vY3">
+                                <variation key="heightClass=regular" constant="-20"/>
+                            </constraint>
+                            <constraint firstItem="28x-96-6lo" firstAttribute="top" secondItem="Qps-Pk-7gK" secondAttribute="bottom" constant="8" symbolic="YES" id="Nno-Vz-XkV">
+                                <variation key="heightClass=regular" constant="56"/>
+                            </constraint>
                             <constraint firstItem="28x-96-6lo" firstAttribute="leading" secondItem="Qps-Pk-7gK" secondAttribute="leading" id="euv-Bh-yUB"/>
-                            <constraint firstItem="q2A-Na-EIK" firstAttribute="leading" secondItem="Qps-Pk-7gK" secondAttribute="leading" id="iW9-9W-fPJ"/>
-                            <constraint firstItem="28x-96-6lo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iva-K4-POu"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="28x-96-6lo" secondAttribute="bottom" constant="294" id="iOo-iI-ePt">
+                                <variation key="heightClass=regular" constant="260"/>
+                            </constraint>
+                            <constraint firstItem="28x-96-6lo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iva-K4-POu">
+                                <variation key="heightClass=regular" constant="0.5"/>
+                            </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="Qps-Pk-7gK" secondAttribute="trailing" constant="32" id="lX4-yg-rBV"/>
-                            <constraint firstItem="Qps-Pk-7gK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="mY4-y6-uw0"/>
-                            <constraint firstItem="28x-96-6lo" firstAttribute="top" secondItem="Qps-Pk-7gK" secondAttribute="bottom" constant="32" id="oZ7-dw-c0V"/>
+                            <constraint firstItem="Qps-Pk-7gK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="lg2-nO-uTB"/>
+                            <constraint firstItem="Qps-Pk-7gK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="mY4-y6-uw0">
+                                <variation key="heightClass=regular" constant="11.5"/>
+                            </constraint>
+                            <constraint firstItem="28x-96-6lo" firstAttribute="top" secondItem="Qps-Pk-7gK" secondAttribute="bottom" constant="32" id="oZ7-dw-c0V">
+                                <variation key="heightClass=regular" constant="8"/>
+                            </constraint>
+                            <constraint firstItem="3Na-dt-jKg" firstAttribute="top" secondItem="Qps-Pk-7gK" secondAttribute="bottom" constant="8" symbolic="YES" id="vkq-a4-9N4">
+                                <variation key="heightClass=regular" constant="-4"/>
+                            </constraint>
+                            <constraint firstItem="Qps-Pk-7gK" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="357" id="x2F-8X-DhC">
+                                <variation key="heightClass=regular" constant="345"/>
+                            </constraint>
                             <constraint firstItem="Qps-Pk-7gK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="32" id="xRF-0i-2hN"/>
                             <constraint firstItem="Qps-Pk-7gK" firstAttribute="top" secondItem="28x-96-6lo" secondAttribute="bottom" constant="8" symbolic="YES" id="zHV-OX-Seh"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="3Na-dt-jKg"/>
+                                <exclude reference="WQr-PC-qLf"/>
+                            </mask>
                             <mask key="constraints">
+                                <exclude reference="2qK-r1-Gak"/>
+                                <exclude reference="5IE-3q-ppL"/>
+                                <exclude reference="vkq-a4-9N4"/>
                                 <exclude reference="5xm-jO-H0I"/>
                                 <exclude reference="6bh-MN-fhv"/>
+                                <exclude reference="Brr-Aw-IH4"/>
+                                <exclude reference="Goq-MD-B6r"/>
+                                <exclude reference="Hr7-8H-vY3"/>
+                                <exclude reference="lg2-nO-uTB"/>
+                                <exclude reference="x2F-8X-DhC"/>
                                 <exclude reference="zHV-OX-Seh"/>
                                 <exclude reference="3e3-5R-Ade"/>
+                                <exclude reference="Nno-Vz-XkV"/>
                                 <exclude reference="euv-Bh-yUB"/>
+                                <exclude reference="GIy-CY-QgN"/>
+                                <exclude reference="iOo-iI-ePt"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular">
+                            <mask key="subviews">
+                                <include reference="3Na-dt-jKg"/>
+                                <include reference="WQr-PC-qLf"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="2qK-r1-Gak"/>
+                                <include reference="5IE-3q-ppL"/>
+                                <include reference="vkq-a4-9N4"/>
+                                <include reference="Brr-Aw-IH4"/>
+                                <exclude reference="ChR-Mk-bMW"/>
+                                <exclude reference="Goq-MD-B6r"/>
+                                <exclude reference="Hr7-8H-vY3"/>
+                                <exclude reference="lX4-yg-rBV"/>
+                                <include reference="lg2-nO-uTB"/>
+                                <exclude reference="mY4-y6-uw0"/>
+                                <exclude reference="x2F-8X-DhC"/>
+                                <exclude reference="xRF-0i-2hN"/>
+                                <include reference="Nno-Vz-XkV"/>
+                                <exclude reference="oZ7-dw-c0V"/>
+                                <include reference="GIy-CY-QgN"/>
+                                <include reference="iOo-iI-ePt"/>
                             </mask>
                         </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
-                        <outlet property="downloadProgressView" destination="q2A-Na-EIK" id="HHk-KY-w75"/>
+                        <outlet property="formHeaderLabel" destination="WQr-PC-qLf" id="HfO-d8-6RR"/>
+                        <outlet property="formHelperLabel" destination="3Na-dt-jKg" id="s7f-la-1sS"/>
+                        <outlet property="getVideoButton" destination="28x-96-6lo" id="CTb-2l-yv7"/>
                         <outlet property="youtubeUrlField" destination="Qps-Pk-7gK" id="V8R-yy-Jfr"/>
                     </connections>
                 </viewController>
@@ -92,7 +262,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="video_title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6F-hf-3KJ">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular" fixedFrame="YES">
                                     <rect key="frame" x="20" y="298" width="78" height="21"/>
@@ -127,12 +297,29 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="videoThumbnail" destination="lWo-3a-1Nf" id="0Ah-Rx-VtW"/>
                         <outlet property="videoTitle" destination="d6F-hf-3KJ" id="ovv-Ws-If8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dUx-Cp-hCk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="912" y="417.75"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Fvh-3p-muv">
+            <objects>
+                <viewController id="NBM-DM-ekG" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zva-Gs-W21"/>
+                        <viewControllerLayoutGuide type="bottom" id="Byd-Cx-bQf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="k55-Ow-7Ly">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HcY-Ud-2W5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
 </document>
