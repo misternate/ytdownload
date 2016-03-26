@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <JVFloatLabeledTextField.h>
 #import "YTGetVideoProps.h"
 
 @interface YTUrlInputVC : UIViewController <UITextFieldDelegate>

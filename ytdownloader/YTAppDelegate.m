@@ -7,7 +7,6 @@
 //
 
 #import "YTAppDelegate.h"
-#import <MBProgressHud.h>
 
 @interface YTAppDelegate ()
 
@@ -43,22 +42,5 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
-+(YTAppDelegate *)getdelegate
-{
-    return (YTAppDelegate *)[UIApplication sharedApplication].delegate;
-}
-
-//TODO: Replace with notification in appropriate VCs
--(void)showIndicator
-{
-    [MBProgressHUD showHUDAddedTo:self.window animated:YES];
-}
-
--(void)hideIndicator
-{
-    [MBProgressHUD hideHUDForView:self.window animated:YES];
-}
-
 
 @end

@@ -9,7 +9,6 @@
 #import "YTDownloadVideo.h"
 #import "YTVideoDataModel.h"
 #import "YTUrlInputVC.h"
-#import "YTAppDelegate.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AFNetworking.h>
 
@@ -23,7 +22,8 @@
     
     if(![videoFilePath isEqualToString:@""])
     {
-        [[YTAppDelegate getdelegate] showIndicator];
+        //Post DL started notification
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"downloadStarted" object:nil userInfo:videoDictionary];
         
         //Let's download the file
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -47,12 +47,8 @@
                    NSError *removeError = nil;
                    //Cleanup file in local directory
                    [[NSFileManager defaultManager] removeItemAtURL:filePath error:&removeError];
-                   
-                   UIAlertView *downloadCompleteAlert = [[UIAlertView alloc] initWithTitle:@"Downloaded!" message:@"download completed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                   
-                   [[YTAppDelegate getdelegate] hideIndicator];
-                   
-                   [downloadCompleteAlert show];
+                   //Post DL complete notification
+                   [[NSNotificationCenter defaultCenter] postNotificationName:@"downloadComplete" object:nil userInfo:videoDictionary];
                }];
           }];
         

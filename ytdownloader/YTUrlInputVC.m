@@ -12,7 +12,7 @@
 #import <Photos/Photos.h>
 #import <AFNetworking.h>
 #import <AssetsLibrary/AssetsLibrary.h>
-#import <MBProgressHud.h>
+#import <SVProgressHUD.h>
 #import <IQKeyboardManager.h>
 
 @interface YTUrlInputVC ()
@@ -42,17 +42,64 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(downloadCompleted:)
+                                                 name:@"downloadComplete"
+                                            object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(downloadStarted:)
+                                                 name:@"downloadStarted"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(downloadHUDDismissed:)
+                                                 name:SVProgressHUDDidDisappearNotification
+                                               object:nil];
 }
 
--(void)viewWillAppear:(BOOL)animated
+-(void)dealloc
 {
-
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"downloadComplete"
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"downloadStarted"
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:SVProgressHUDDidDisappearNotification
+                                                  object:nil];
 }
 
--(void)viewWillDisappear:(BOOL)animated
+-(void)downloadStarted:(NSNotification *)note
 {
+    NSString *videoTitle = [[note userInfo] valueForKey:@"video_title"];
+    NSString *shortVideoTitle = [[videoTitle substringToIndex:24] stringByAppendingString:@"..."];
+    NSString *videoDownloadingWithTitle = [NSString stringWithFormat:@"Downloading\r%@", shortVideoTitle];
+    NSData *videoThumbnailData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: [NSString stringWithFormat:[[note userInfo] valueForKey:@"video_thumbnail"]]]];
+    
+    UIImage *videoThumbnial = [[UIImage alloc] initWithData:videoThumbnailData];
+    
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD setDefaultAnimationType:SVProgressHUDAnimationTypeNative];
+    [SVProgressHUD setInfoImage:videoThumbnial];
+    
+    [SVProgressHUD showWithStatus:videoDownloadingWithTitle];
+}
 
+-(void)downloadCompleted:(NSNotification *)note
+{
+    [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+    [SVProgressHUD showSuccessWithStatus:@"Download Complete"];
+}
+
+-(void)downloadHUDDismissed: (NSNotification *)note
+{
+    self.youtubeUrlField.text = @"";
+    [self.youtubeUrlField becomeFirstResponder];
 }
 
 -(void)getPermissions
@@ -102,33 +149,37 @@
     if(self.youtubeUrlField.text.length > 0)
     {
         NSString *videoID = [self returnParsedURL:self.youtubeUrlField.text];
-        [getVideoManager getVideoWithID:videoID completion:^(BOOL success)
+        
+        if(videoID)
         {
-            if(success)
+            [getVideoManager getVideoWithID:videoID completion:^(BOOL success)
             {
-                YTDownloadVideo *downloadManager = [[YTDownloadVideo alloc] init];
-                [downloadManager downloadVideo];
-                
-//                UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//                UIViewController *videoPreview = [mainStoryboard instantiateViewControllerWithIdentifier:@"videoPreviewViewController"];
-//                [self presentViewController:videoPreview animated:YES completion:nil];
-            }
-            else
-            {
-                [self showKeyboard];
-                
-                UIAlertController *blankFieldAlert = [UIAlertController alertControllerWithTitle: @"Download Failed!"
-                                                                                         message: @"Please check your link"
-                                                                                  preferredStyle: UIAlertControllerStyleAlert];
-                
-                UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                                      handler:^(UIAlertAction * action) {}];
-                
-                [blankFieldAlert addAction:defaultAction];
-                
-                [self presentViewController:blankFieldAlert animated:YES completion:nil];
-            }
-        }];
+                if(success)
+                {
+                    YTDownloadVideo *downloadManager = [[YTDownloadVideo alloc] init];
+                    [downloadManager downloadVideo];
+                    
+    //                UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    //                UIViewController *videoPreview = [mainStoryboard instantiateViewControllerWithIdentifier:@"videoPreviewViewController"];
+    //                [self presentViewController:videoPreview animated:YES completion:nil];
+                }
+                else
+                {
+                    [self showKeyboard];
+                    
+                    UIAlertController *blankFieldAlert = [UIAlertController alertControllerWithTitle: @"Download Failed!"
+                                                                                             message: @"Please check your link"
+                                                                                      preferredStyle: UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                                          handler:^(UIAlertAction * action) {}];
+                    
+                    [blankFieldAlert addAction:defaultAction];
+                    
+                    [self presentViewController:blankFieldAlert animated:YES completion:nil];
+                }
+            }];
+        }
     }
 }
 
@@ -148,41 +199,19 @@
     }
     else
     {
-        UIAlertController *blankFieldAlert = [UIAlertController alertControllerWithTitle: @"Invalid Link"
-                                                                                 message: @"Please enter a youtu.be or youtube.com link"
-                                                                          preferredStyle: UIAlertControllerStyleAlert];
-        
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                              handler:^(UIAlertAction * action) {
-                                                                  [self showKeyboard];
-                                                              }];
-        
-        [blankFieldAlert addAction:defaultAction];
-        
-        [self presentViewController:blankFieldAlert animated:YES completion:nil];
+        [self addTextFieldAlert:@"Invalid link entered!" withDelay:.750];
+        return 0;
+
     }
     
     return fieldString;
 }
 
--(void)showProgressHUD
-{
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-}
-
--(void)hideProgressHUD
-{
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-}
-
 -(void)setupView
 {
+    //Clear statusbar
     [self setNeedsStatusBarAppearanceUpdate];
     
-    //Button Setup Shit
-//    self.getVideoButton.backgroundColor = [UIColor colorWithRed:0.188 green:0.188 blue:0.188 alpha:1.0];
-//    self.getVideoButton.contentEdgeInsets = UIEdgeInsetsMake(8.0f, 0.0f, 8.0f, 0.0f);
-//    [self.getVideoButton setTitleColor: [UIColor whiteColor] forState:UIControlStateNormal];
     self.view.backgroundColor = [UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1]; /*#f7f7f7*/
     
     self.formHeaderLabel.textColor = [UIColor whiteColor];
@@ -190,7 +219,6 @@
     //Textfield Setup
     self.youtubeUrlField.inputAccessoryView = [[UIView alloc] init]; //this removes IQKeyboardManager's toolbar
     self.youtubeUrlField.clearButtonMode = UITextFieldViewModeAlways;
-    //[UIColor colorWithRed:0.8 green:0.094 blue:0.118 alpha:1] /*#cc181e*/
     self.youtubeUrlField.backgroundColor = [UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1];  /*#f2f2f2*/
     self.youtubeUrlField.borderStyle = UITextBorderStyleNone;
     self.youtubeUrlField.font = [UIFont systemFontOfSize:16.0 weight:UIFontWeightMedium];
@@ -223,6 +251,21 @@
     self.youtubeUrlField.returnKeyType = UIReturnKeySend;
     
     NSLog(@"frame width: %f // frame height: %f", self.view.frame.size.height, self.view.frame.size.width);
+}
+
+#pragma mark - Custom Methods
+
+-(void)addTextFieldAlert: (NSString *)alertString withDelay: (double)delayInSeconds
+{
+    self.youtubeUrlField.text = @"";
+    self.youtubeUrlField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:alertString attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:0.8 green:0.094 blue:0.118 alpha:.70]}];
+    
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
+    {
+       self.youtubeUrlField.placeholder = @"Enter a youtu.be or youtube.com link";
+       [self.youtubeUrlField becomeFirstResponder];
+    });
 }
 
 
@@ -265,14 +308,7 @@
     }
     else
     {
-        self.youtubeUrlField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"No link entered!" attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:0.8 green:0.094 blue:0.118 alpha:.70]}];
-
-        double delayInSeconds = .40;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
-        {
-           self.youtubeUrlField.placeholder = @"Enter a youtu.be or youtube.com link";
-        });
+        [self addTextFieldAlert:@"No link entered!" withDelay:.40];
     }
     
     return YES;

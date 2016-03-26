@@ -125,10 +125,10 @@
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                 </accessibility>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular" fixedFrame="YES">
+                                <variation key="heightClass=regular" misplaced="YES">
                                     <rect key="frame" x="14" y="270" width="302" height="48"/>
                                 </variation>
                             </label>
@@ -144,7 +144,9 @@
                             </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="Qps-Pk-7gK" secondAttribute="trailing" constant="148" id="5xm-jO-H0I"/>
                             <constraint firstItem="Qps-Pk-7gK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="129" id="6bh-MN-fhv"/>
+                            <constraint firstItem="WQr-PC-qLf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-6" id="AQo-Ps-YGi"/>
                             <constraint firstAttribute="trailing" secondItem="Qps-Pk-7gK" secondAttribute="trailing" id="Brr-Aw-IH4"/>
+                            <constraint firstItem="Qps-Pk-7gK" firstAttribute="top" secondItem="WQr-PC-qLf" secondAttribute="bottom" constant="8" id="C1k-6u-c7B"/>
                             <constraint firstItem="Qps-Pk-7gK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ChR-Mk-bMW"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="3Na-dt-jKg" secondAttribute="bottom" constant="317" id="GIy-CY-QgN"/>
                             <constraint firstItem="Qps-Pk-7gK" firstAttribute="centerX" secondItem="28x-96-6lo" secondAttribute="centerX" id="Goq-MD-B6r">
@@ -186,17 +188,19 @@
                                 <exclude reference="WQr-PC-qLf"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="2qK-r1-Gak"/>
-                                <exclude reference="5IE-3q-ppL"/>
-                                <exclude reference="vkq-a4-9N4"/>
+                                <exclude reference="AQo-Ps-YGi"/>
                                 <exclude reference="5xm-jO-H0I"/>
                                 <exclude reference="6bh-MN-fhv"/>
                                 <exclude reference="Brr-Aw-IH4"/>
+                                <exclude reference="C1k-6u-c7B"/>
                                 <exclude reference="Goq-MD-B6r"/>
                                 <exclude reference="Hr7-8H-vY3"/>
                                 <exclude reference="lg2-nO-uTB"/>
                                 <exclude reference="x2F-8X-DhC"/>
                                 <exclude reference="zHV-OX-Seh"/>
+                                <exclude reference="2qK-r1-Gak"/>
+                                <exclude reference="5IE-3q-ppL"/>
+                                <exclude reference="vkq-a4-9N4"/>
                                 <exclude reference="3e3-5R-Ade"/>
                                 <exclude reference="Nno-Vz-XkV"/>
                                 <exclude reference="euv-Bh-yUB"/>
@@ -210,10 +214,9 @@
                                 <include reference="WQr-PC-qLf"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="2qK-r1-Gak"/>
-                                <include reference="5IE-3q-ppL"/>
-                                <include reference="vkq-a4-9N4"/>
+                                <include reference="AQo-Ps-YGi"/>
                                 <include reference="Brr-Aw-IH4"/>
+                                <include reference="C1k-6u-c7B"/>
                                 <exclude reference="ChR-Mk-bMW"/>
                                 <exclude reference="Goq-MD-B6r"/>
                                 <exclude reference="Hr7-8H-vY3"/>
@@ -222,6 +225,9 @@
                                 <exclude reference="mY4-y6-uw0"/>
                                 <exclude reference="x2F-8X-DhC"/>
                                 <exclude reference="xRF-0i-2hN"/>
+                                <include reference="2qK-r1-Gak"/>
+                                <include reference="5IE-3q-ppL"/>
+                                <include reference="vkq-a4-9N4"/>
                                 <include reference="Nno-Vz-XkV"/>
                                 <exclude reference="oZ7-dw-c0V"/>
                                 <include reference="GIy-CY-QgN"/>

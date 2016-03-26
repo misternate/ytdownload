@@ -35,7 +35,7 @@ static YTVideoDataModel *videoDataModel;
 -(void)resetVideoModel
 {
     videoModel = nil;
-    NSLog(@"cleared out dictionary of grid: %@", videoDataModel);
+    NSLog(@"cleared out video model: %@", videoDataModel);
 }
 
 @end

@@ -12,9 +12,5 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-+(YTAppDelegate *)getdelegate;
--(void)showIndicator;
--(void)hideIndicator;
-
 @end
 
