@@ -73,19 +73,22 @@
                                                   object:nil];
 }
 
+
+#pragma mark - Notifications
+
 -(void)downloadStarted:(NSNotification *)note
 {
-    NSString *videoTitle = [[note userInfo] valueForKey:@"video_title"];
-    NSString *shortVideoTitle = [[videoTitle substringToIndex:24] stringByAppendingString:@"..."];
-    NSString *videoDownloadingWithTitle = [NSString stringWithFormat:@"Downloading\r%@", shortVideoTitle];
+    NSString *videoTitle = [self returnShortVideoTitle:[[note userInfo] valueForKey:@"video_title"]];
+    
+    NSString *videoDownloadingWithTitle = [NSString stringWithFormat:@"Downloading\r%@", videoTitle];
     NSData *videoThumbnailData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: [NSString stringWithFormat:[[note userInfo] valueForKey:@"video_thumbnail"]]]];
     
-    UIImage *videoThumbnial = [[UIImage alloc] initWithData:videoThumbnailData];
-    
+    UIImage *videoThumbnail = [[UIImage alloc] initWithData:videoThumbnailData];
+
     [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
     [SVProgressHUD setDefaultAnimationType:SVProgressHUDAnimationTypeNative];
-    [SVProgressHUD setInfoImage:videoThumbnial];
+    [SVProgressHUD setInfoImage:videoThumbnail];
     
     [SVProgressHUD showWithStatus:videoDownloadingWithTitle];
 }
@@ -101,6 +104,9 @@
     self.youtubeUrlField.text = @"";
     [self.youtubeUrlField becomeFirstResponder];
 }
+
+
+#pragma mark - Permissions
 
 -(void)getPermissions
 {
@@ -141,7 +147,8 @@
     }
 }
 
-- (IBAction)sendVideoId:(id)sender {
+- (IBAction)sendVideoId:(id)sender
+{
     
     [self.youtubeUrlField resignFirstResponder];
     
@@ -152,16 +159,18 @@
         
         if(videoID)
         {
+            [self.youtubeUrlField resignFirstResponder];
+            
+            [self addTextFieldAlert:@"Loading Video Info..." withDelay:90.0];
+            
             [getVideoManager getVideoWithID:videoID completion:^(BOOL success)
             {
+                [self clearTextFieldAlert];
+                
                 if(success)
                 {
                     YTDownloadVideo *downloadManager = [[YTDownloadVideo alloc] init];
                     [downloadManager downloadVideo];
-                    
-    //                UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    //                UIViewController *videoPreview = [mainStoryboard instantiateViewControllerWithIdentifier:@"videoPreviewViewController"];
-    //                [self presentViewController:videoPreview animated:YES completion:nil];
                 }
                 else
                 {
@@ -183,6 +192,26 @@
     }
 }
 
+#pragma mark - Custom Methods
+
+-(void)addTextFieldAlert: (NSString *)alertString withDelay: (double)delayInSeconds
+{
+    self.youtubeUrlField.text = @"";
+    self.youtubeUrlField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:alertString attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:0.8 green:0.094 blue:0.118 alpha:.70]}];
+    
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
+    {
+       self.youtubeUrlField.placeholder = @"Enter a youtu.be or youtube.com link";
+       [self.youtubeUrlField becomeFirstResponder];
+    });
+}
+
+-(void)clearTextFieldAlert
+{
+    self.youtubeUrlField.placeholder = @"Enter a youtu.be or youtube.com link";
+}
+
 -(NSString *)returnParsedURL: (NSString *)fieldString{
     
     if([fieldString containsString:@"youtu.be"])
@@ -201,71 +230,23 @@
     {
         [self addTextFieldAlert:@"Invalid link entered!" withDelay:.750];
         return 0;
-
+        
     }
     
     return fieldString;
 }
 
--(void)setupView
+-(NSString *)returnShortVideoTitle: (NSString *)videoTitle
 {
-    //Clear statusbar
-    [self setNeedsStatusBarAppearanceUpdate];
-    
-    self.view.backgroundColor = [UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1]; /*#f7f7f7*/
-    
-    self.formHeaderLabel.textColor = [UIColor whiteColor];
-    
-    //Textfield Setup
-    self.youtubeUrlField.inputAccessoryView = [[UIView alloc] init]; //this removes IQKeyboardManager's toolbar
-    self.youtubeUrlField.clearButtonMode = UITextFieldViewModeAlways;
-    self.youtubeUrlField.backgroundColor = [UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1];  /*#f2f2f2*/
-    self.youtubeUrlField.borderStyle = UITextBorderStyleNone;
-    self.youtubeUrlField.font = [UIFont systemFontOfSize:16.0 weight:UIFontWeightMedium];
-    self.youtubeUrlField.textColor = [UIColor colorWithRed:0.502 green:0.502 blue:0.502 alpha:1]; /*#808080*/
-    self.youtubeUrlField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Enter a youtu.be or youtube.com link" attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:0.792 green:0.792 blue:0.792 alpha:1]}];
-    
-    self.youtubeUrlField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    self.youtubeUrlField.autocorrectionType = UITextAutocorrectionTypeNo;
-    self.youtubeUrlField.tintColor = [UIColor colorWithRed:0.8 green:0.094 blue:0.118 alpha:1]; /*#cc181e*/
-    
-    //Textfield set inset with spacer view
-    UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 16, 16)];
-    [self.youtubeUrlField setLeftViewMode:UITextFieldViewModeAlways];
-    [self.youtubeUrlField setLeftView:spacerView];
-    
-    //Background Image Context
-    UIGraphicsBeginImageContext(self.view.frame.size);
-    [[UIImage imageNamed:@"background"] drawInRect:self.view.bounds];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
-    
-    //Keyboard Setup and Actions
-    UITapGestureRecognizer *dismissKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                          action:@selector(dismissKeyboard)];
-    [self.view addGestureRecognizer:dismissKeyboardTap];
-    self.youtubeUrlField.keyboardAppearance = UIKeyboardAppearanceDark;
-    self.youtubeUrlField.keyboardType = UIKeyboardTypeWebSearch;
-    self.youtubeUrlField.returnKeyType = UIReturnKeySend;
-    
-    NSLog(@"frame width: %f // frame height: %f", self.view.frame.size.height, self.view.frame.size.width);
-}
-
-#pragma mark - Custom Methods
-
--(void)addTextFieldAlert: (NSString *)alertString withDelay: (double)delayInSeconds
-{
-    self.youtubeUrlField.text = @"";
-    self.youtubeUrlField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:alertString attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:0.8 green:0.094 blue:0.118 alpha:.70]}];
-    
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
+    if(videoTitle.length > 24)
     {
-       self.youtubeUrlField.placeholder = @"Enter a youtu.be or youtube.com link";
-       [self.youtubeUrlField becomeFirstResponder];
-    });
+        NSString *shortVideoTitle = [[videoTitle substringToIndex:24] stringByAppendingString:@"..."];
+        return shortVideoTitle;
+    }
+    else
+    {
+        return videoTitle;
+    }
 }
 
 
@@ -312,6 +293,54 @@
     }
     
     return YES;
+}
+
+#pragma mark - Setup View
+
+-(void)setupView
+{
+    //Clear statusbar
+    [self setNeedsStatusBarAppearanceUpdate];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1]; /*#f7f7f7*/
+    
+    self.formHeaderLabel.textColor = [UIColor whiteColor];
+    
+    //Textfield Setup
+    self.youtubeUrlField.inputAccessoryView = [[UIView alloc] init]; //this removes IQKeyboardManager's toolbar
+    self.youtubeUrlField.clearButtonMode = UITextFieldViewModeAlways;
+    self.youtubeUrlField.backgroundColor = [UIColor colorWithRed:0.969 green:0.969 blue:0.969 alpha:1];  /*#f2f2f2*/
+    self.youtubeUrlField.borderStyle = UITextBorderStyleNone;
+    self.youtubeUrlField.font = [UIFont systemFontOfSize:16.0 weight:UIFontWeightMedium];
+    self.youtubeUrlField.textColor = [UIColor colorWithRed:0.502 green:0.502 blue:0.502 alpha:1]; /*#808080*/
+    self.youtubeUrlField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"Enter a youtu.be or youtube.com link" attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:0.792 green:0.792 blue:0.792 alpha:1]}];
+    
+    self.youtubeUrlField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.youtubeUrlField.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.youtubeUrlField.tintColor = [UIColor colorWithRed:0.8 green:0.094 blue:0.118 alpha:1]; /*#cc181e*/
+    
+    //Textfield set inset with spacer view
+    UIView *spacerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 16, 16)];
+    [self.youtubeUrlField setLeftViewMode:UITextFieldViewModeAlways];
+    [self.youtubeUrlField setLeftView:spacerView];
+    
+    //Background Image Context
+    UIGraphicsBeginImageContext(self.view.frame.size);
+    [[UIImage imageNamed:@"background"] drawInRect:self.view.bounds];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:image];
+    
+    //Keyboard Setup and Actions
+    UITapGestureRecognizer *dismissKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                         action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:dismissKeyboardTap];
+    self.youtubeUrlField.keyboardAppearance = UIKeyboardAppearanceDark;
+    self.youtubeUrlField.keyboardType = UIKeyboardTypeWebSearch;
+    self.youtubeUrlField.returnKeyType = UIReturnKeySend;
+    
+    NSLog(@"frame width: %f // frame height: %f", self.view.frame.size.height, self.view.frame.size.width);
 }
 
 @end

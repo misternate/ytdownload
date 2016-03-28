@@ -19,9 +19,6 @@
 {
     YTURLPaths *ytURLPaths = [[YTURLPaths alloc] init];
     NSString *youtubeVideoIdUrl = [ytURLPaths getVideoPropsURL:videoId];
-//    NSString *youtubeVideoIdUrl = [NSString stringWithFormat:@"%@%@%@", @"http://192.168.0.254/ytdownload/getvideo.php?videoid=" , videoId, @"&format=ipad"];
-    
-    NSLog(@"youtube url---%@---", youtubeVideoIdUrl);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
