@@ -161,7 +161,7 @@
         {
             [self.youtubeUrlField resignFirstResponder];
             
-            [self addTextFieldAlert:@"Loading Video Info..." withDelay:90.0];
+            [self addTextFieldAlert:@"Loading Video Info..." withDelay:90.0 andError:NO];
             
             [getVideoManager getVideoWithID:videoID completion:^(BOOL success)
             {
@@ -176,16 +176,7 @@
                 {
                     [self showKeyboard];
                     
-                    UIAlertController *blankFieldAlert = [UIAlertController alertControllerWithTitle: @"Download Failed!"
-                                                                                             message: @"Please check your link"
-                                                                                      preferredStyle: UIAlertControllerStyleAlert];
-                    
-                    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                                          handler:^(UIAlertAction * action) {}];
-                    
-                    [blankFieldAlert addAction:defaultAction];
-                    
-                    [self presentViewController:blankFieldAlert animated:YES completion:nil];
+                    [self addTextFieldAlert:@"Invalid YouTube link. Try again..." withDelay:1.0 andError:YES];
                 }
             }];
         }
@@ -194,10 +185,20 @@
 
 #pragma mark - Custom Methods
 
--(void)addTextFieldAlert: (NSString *)alertString withDelay: (double)delayInSeconds
+-(void)addTextFieldAlert: (NSString *)alertString withDelay: (double)delayInSeconds andError: (BOOL)error
 {
+    UIColor *statusColor;
+    if(error)
+    {
+        statusColor = [UIColor colorWithRed:0.8 green:0.094 blue:0.118 alpha:.70];
+    }
+    else
+    {
+        statusColor = [UIColor colorWithRed:0.792 green:0.792 blue:0.792 alpha:1];
+    }
+
     self.youtubeUrlField.text = @"";
-    self.youtubeUrlField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:alertString attributes:@{NSForegroundColorAttributeName: [UIColor colorWithRed:0.8 green:0.094 blue:0.118 alpha:.70]}];
+    self.youtubeUrlField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:alertString attributes:@{NSForegroundColorAttributeName: statusColor}];
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
@@ -220,7 +221,7 @@
         fieldString = [fieldString substringFromIndex:rangeValue.length + rangeValue.location];
         NSLog(@"fieldString: %@", fieldString);
     }
-    else if([fieldString containsString:@"youtube.com"])
+    else if([fieldString containsString:@"youtube.com/watch?v="])
     {
         NSRange rangeValue = [fieldString rangeOfString:@"youtube.com/watch?v=" options:NSCaseInsensitiveSearch];
         fieldString = [fieldString substringFromIndex:rangeValue.length + rangeValue.location];
@@ -228,7 +229,7 @@
     }
     else
     {
-        [self addTextFieldAlert:@"Invalid link entered!" withDelay:.750];
+        [self addTextFieldAlert:@"Invalid link entered!" withDelay:.750 andError:YES];
         return 0;
         
     }
@@ -289,7 +290,7 @@
     }
     else
     {
-        [self addTextFieldAlert:@"No link entered!" withDelay:.40];
+        [self addTextFieldAlert:@"No link entered!" withDelay:.40 andError:YES];
     }
     
     return YES;
