@@ -8,6 +8,7 @@
 
 #import "YTUrlInputVC.h"
 #import "YTDownloadVideo.h"
+#import "UIImage+animatedGIF.h"
 
 #import <Photos/Photos.h>
 #import <AFNetworking.h>
@@ -16,7 +17,7 @@
 #import <IQKeyboardManager.h>
 
 @interface YTUrlInputVC ()
-
+@property (nonatomic) UIView *dontFake;
 @property (strong, nonatomic) IBOutlet UILabel *formHeaderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *formHelperLabel;
 @property (nonatomic) YTGetVideoProps *ytGetVideo;
@@ -176,7 +177,7 @@
                 {
                     [self showKeyboard];
                     
-                    [self addTextFieldAlert:@"Invalid YouTube link. Try again..." withDelay:1.0 andError:YES];
+                    [self addTextFieldAlert:@"Invalid YouTube link. Try again..." withDelay:1.50 andError:YES];
                 }
             }];
         }
@@ -187,15 +188,7 @@
 
 -(void)addTextFieldAlert: (NSString *)alertString withDelay: (double)delayInSeconds andError: (BOOL)error
 {
-    UIColor *statusColor;
-    if(error)
-    {
-        statusColor = [UIColor colorWithRed:0.8 green:0.094 blue:0.118 alpha:.70];
-    }
-    else
-    {
-        statusColor = [UIColor colorWithRed:0.792 green:0.792 blue:0.792 alpha:1];
-    }
+    UIColor *statusColor = error ? [UIColor colorWithRed:0.8 green:0.094 blue:0.118 alpha:.70]: [UIColor colorWithRed:0.792 green:0.792 blue:0.792 alpha:1];
 
     self.youtubeUrlField.text = @"";
     self.youtubeUrlField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:alertString attributes:@{NSForegroundColorAttributeName: statusColor}];
@@ -227,9 +220,16 @@
         fieldString = [fieldString substringFromIndex:rangeValue.length + rangeValue.location];
         NSLog(@"fieldString: %@", fieldString);
     }
+    else if([fieldString isEqualToString: @"dontfakethefunk!"])
+    {
+        [self dontFakeTheFunk];
+        
+        return 0;
+    }
     else
     {
-        [self addTextFieldAlert:@"Invalid link entered!" withDelay:.750 andError:YES];
+        [self addTextFieldAlert:@"Link was not a valid YouTube link!" withDelay:1.50 andError:YES];
+        
         return 0;
         
     }
@@ -333,15 +333,34 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:image];
     
-    //Keyboard Setup and Actions
-    UITapGestureRecognizer *dismissKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                         action:@selector(dismissKeyboard)];
-    [self.view addGestureRecognizer:dismissKeyboardTap];
     self.youtubeUrlField.keyboardAppearance = UIKeyboardAppearanceDark;
     self.youtubeUrlField.keyboardType = UIKeyboardTypeWebSearch;
     self.youtubeUrlField.returnKeyType = UIReturnKeySend;
     
+    //Keyboard Setup and Actions
+//    UITapGestureRecognizer *dismissKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+//                                                                                         action:@selector(dismissKeyboard)];
+//    [self.view addGestureRecognizer:dismissKeyboardTap];
+    
     NSLog(@"frame width: %f // frame height: %f", self.view.frame.size.height, self.view.frame.size.width);
 }
+
+-(void)dontFakeTheFunk{
+    self.dontFake = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    UIImageView *dontFakeView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    dontFakeView.image = [UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"dontfakethefunk" withExtension:@"gif"]]];
+    UIButton *closeDontFake = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [closeDontFake setTitle:@"" forState:UIControlStateNormal];
+    [closeDontFake addTarget:self action:@selector(closeDontFakeTheFunk) forControlEvents:UIControlEventTouchUpInside];
+    [self.dontFake addSubview:dontFakeView];
+    [self.dontFake addSubview:closeDontFake];
+    [self.view addSubview:self.dontFake];
+}
+
+-(void)closeDontFakeTheFunk{
+    [_dontFake removeFromSuperview];
+    [self addTextFieldAlert:@"You silly fuck!" withDelay:.75 andError:YES];
+}
+
 
 @end

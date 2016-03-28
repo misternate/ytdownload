@@ -21,6 +21,8 @@
 		439CA6491C711386004BEEB4 /* YTUrlInputVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CA6481C711386004BEEB4 /* YTUrlInputVC.m */; };
 		439CA64D1C7116E7004BEEB4 /* YTGetVideoProps.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CA64C1C7116E7004BEEB4 /* YTGetVideoProps.m */; };
 		43EBEAEE1CA1864100F78466 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43EBEAED1CA1864100F78466 /* Assets.xcassets */; };
+		43F6A50A1CA909DA00422400 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 43F6A5091CA909DA00422400 /* UIImage+animatedGIF.m */; };
+		43F6A50C1CA90ACE00422400 /* dontfakethefunk.gif in Resources */ = {isa = PBXBuildFile; fileRef = 43F6A50B1CA90ACE00422400 /* dontfakethefunk.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +70,9 @@
 		439CA64B1C7116E7004BEEB4 /* YTGetVideoProps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YTGetVideoProps.h; path = Network/YTGetVideoProps.h; sourceTree = "<group>"; };
 		439CA64C1C7116E7004BEEB4 /* YTGetVideoProps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YTGetVideoProps.m; path = Network/YTGetVideoProps.m; sourceTree = "<group>"; };
 		43EBEAED1CA1864100F78466 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		43F6A5081CA909DA00422400 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
+		43F6A5091CA909DA00422400 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
+		43F6A50B1CA90ACE00422400 /* dontfakethefunk.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = dontfakethefunk.gif; path = Assets.xcassets/dontfakethefunk.gif; sourceTree = "<group>"; };
 		4C17ED8E70F1188565251EB2 /* Pods-ytdownloader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ytdownloader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ytdownloader/Pods-ytdownloader.debug.xcconfig"; sourceTree = "<group>"; };
 		F5AEE03B1303A77300D8C216 /* libPods-ytdownloader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ytdownloader.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -159,6 +164,7 @@
 				439CA6221C71116B004BEEB4 /* LaunchScreen.storyboard */,
 				439CA6251C71116B004BEEB4 /* Info.plist */,
 				43EBEAED1CA1864100F78466 /* Assets.xcassets */,
+				43F6A50B1CA90ACE00422400 /* dontfakethefunk.gif */,
 				439CA6141C71116B004BEEB4 /* Supporting Files */,
 			);
 			path = ytdownloader;
@@ -193,6 +199,7 @@
 		439CA64A1C7113FB004BEEB4 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				43F6A5071CA909DA00422400 /* Utils */,
 				4366E8251C8C9D5400928EED /* Model */,
 				439CA64E1C7116F0004BEEB4 /* Network */,
 				4366E82F1C9601DA00928EED /* VCs */,
@@ -211,6 +218,15 @@
 				4366E82A1C95F3F700928EED /* YTDownloadVideo.m */,
 			);
 			name = Network;
+			sourceTree = "<group>";
+		};
+		43F6A5071CA909DA00422400 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				43F6A5081CA909DA00422400 /* UIImage+animatedGIF.h */,
+				43F6A5091CA909DA00422400 /* UIImage+animatedGIF.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		C6B345498BF13D155C994813 /* Frameworks */ = {
@@ -326,6 +342,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43F6A50C1CA90ACE00422400 /* dontfakethefunk.gif in Resources */,
 				439CA6241C71116B004BEEB4 /* LaunchScreen.storyboard in Resources */,
 				43EBEAEE1CA1864100F78466 /* Assets.xcassets in Resources */,
 				439CA61F1C71116B004BEEB4 /* Main.storyboard in Resources */,
@@ -390,6 +407,7 @@
 				439CA64D1C7116E7004BEEB4 /* YTGetVideoProps.m in Sources */,
 				4366E8281C95E71900928EED /* YTURLPaths.m in Sources */,
 				439CA6191C71116B004BEEB4 /* YTAppDelegate.m in Sources */,
+				43F6A50A1CA909DA00422400 /* UIImage+animatedGIF.m in Sources */,
 				439CA6161C71116B004BEEB4 /* main.m in Sources */,
 				4366E82E1C96018200928EED /* YTVideoPreviewVC.m in Sources */,
 				439CA6491C711386004BEEB4 /* YTUrlInputVC.m in Sources */,
