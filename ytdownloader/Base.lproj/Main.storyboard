@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -120,7 +120,7 @@
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's the YouTube link?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQr-PC-qLf">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's your YouTube link?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WQr-PC-qLf">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
@@ -128,10 +128,10 @@
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular" misplaced="YES">
-                                    <rect key="frame" x="14" y="270" width="302" height="48"/>
-                                </variation>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="v2O-FL-nxa">
+                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -158,6 +158,8 @@
                             <constraint firstItem="28x-96-6lo" firstAttribute="top" secondItem="Qps-Pk-7gK" secondAttribute="bottom" constant="8" symbolic="YES" id="Nno-Vz-XkV">
                                 <variation key="heightClass=regular" constant="56"/>
                             </constraint>
+                            <constraint firstItem="v2O-FL-nxa" firstAttribute="centerY" secondItem="Qps-Pk-7gK" secondAttribute="centerY" id="Pg3-S4-EhI"/>
+                            <constraint firstItem="v2O-FL-nxa" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="TiX-nh-yl8"/>
                             <constraint firstItem="28x-96-6lo" firstAttribute="leading" secondItem="Qps-Pk-7gK" secondAttribute="leading" id="euv-Bh-yUB"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="28x-96-6lo" secondAttribute="bottom" constant="294" id="iOo-iI-ePt">
                                 <variation key="heightClass=regular" constant="260"/>
@@ -186,8 +188,14 @@
                             <mask key="subviews">
                                 <exclude reference="3Na-dt-jKg"/>
                                 <exclude reference="WQr-PC-qLf"/>
+                                <exclude reference="v2O-FL-nxa"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Pg3-S4-EhI"/>
+                                <exclude reference="TiX-nh-yl8"/>
+                                <exclude reference="2qK-r1-Gak"/>
+                                <exclude reference="5IE-3q-ppL"/>
+                                <exclude reference="vkq-a4-9N4"/>
                                 <exclude reference="AQo-Ps-YGi"/>
                                 <exclude reference="5xm-jO-H0I"/>
                                 <exclude reference="6bh-MN-fhv"/>
@@ -198,9 +206,6 @@
                                 <exclude reference="lg2-nO-uTB"/>
                                 <exclude reference="x2F-8X-DhC"/>
                                 <exclude reference="zHV-OX-Seh"/>
-                                <exclude reference="2qK-r1-Gak"/>
-                                <exclude reference="5IE-3q-ppL"/>
-                                <exclude reference="vkq-a4-9N4"/>
                                 <exclude reference="3e3-5R-Ade"/>
                                 <exclude reference="Nno-Vz-XkV"/>
                                 <exclude reference="euv-Bh-yUB"/>
@@ -212,8 +217,14 @@
                             <mask key="subviews">
                                 <include reference="3Na-dt-jKg"/>
                                 <include reference="WQr-PC-qLf"/>
+                                <include reference="v2O-FL-nxa"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="Pg3-S4-EhI"/>
+                                <include reference="TiX-nh-yl8"/>
+                                <include reference="2qK-r1-Gak"/>
+                                <include reference="5IE-3q-ppL"/>
+                                <include reference="vkq-a4-9N4"/>
                                 <include reference="AQo-Ps-YGi"/>
                                 <include reference="Brr-Aw-IH4"/>
                                 <include reference="C1k-6u-c7B"/>
@@ -225,9 +236,6 @@
                                 <exclude reference="mY4-y6-uw0"/>
                                 <exclude reference="x2F-8X-DhC"/>
                                 <exclude reference="xRF-0i-2hN"/>
-                                <include reference="2qK-r1-Gak"/>
-                                <include reference="5IE-3q-ppL"/>
-                                <include reference="vkq-a4-9N4"/>
                                 <include reference="Nno-Vz-XkV"/>
                                 <exclude reference="oZ7-dw-c0V"/>
                                 <include reference="GIy-CY-QgN"/>
@@ -239,6 +247,7 @@
                     <connections>
                         <outlet property="formHeaderLabel" destination="WQr-PC-qLf" id="HfO-d8-6RR"/>
                         <outlet property="formHelperLabel" destination="3Na-dt-jKg" id="s7f-la-1sS"/>
+                        <outlet property="formVideoInfoIndicator" destination="v2O-FL-nxa" id="QSQ-9P-E2F"/>
                         <outlet property="getVideoButton" destination="28x-96-6lo" id="CTb-2l-yv7"/>
                         <outlet property="youtubeUrlField" destination="Qps-Pk-7gK" id="V8R-yy-Jfr"/>
                     </connections>
@@ -320,6 +329,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Byd-Cx-bQf"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="k55-Ow-7Ly">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

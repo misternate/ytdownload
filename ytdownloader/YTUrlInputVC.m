@@ -20,9 +20,11 @@
 @property (nonatomic) UIView *dontFake;
 @property (strong, nonatomic) IBOutlet UILabel *formHeaderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *formHelperLabel;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *formVideoInfoIndicator;
 @property (nonatomic) YTGetVideoProps *ytGetVideo;
 @property (strong, nonatomic) IBOutlet UIProgressView *downloadProgressView;
 @property (strong, nonatomic) IBOutlet UIButton *getVideoButton;
+@property (nonatomic) NSTimer *startDontFakeTheFunkTimer;
 
 @end
 
@@ -162,7 +164,9 @@
         {
             [self.youtubeUrlField resignFirstResponder];
             
-            [self addTextFieldAlert:@"Loading Video Info..." withDelay:90.0 andError:NO];
+            [self addTextFieldAlert:@"Gathering Video Information..." withDelay:90.0 andError:NO];
+            self.formVideoInfoIndicator.hidden = FALSE;
+            [self.formVideoInfoIndicator startAnimating];
             
             [getVideoManager getVideoWithID:videoID completion:^(BOOL success)
             {
@@ -196,14 +200,16 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
     {
-       self.youtubeUrlField.placeholder = @"Enter a youtu.be or youtube.com link";
-       [self.youtubeUrlField becomeFirstResponder];
+        self.youtubeUrlField.placeholder = @"Enter a youtu.be or youtube.com link";
+        [self.youtubeUrlField becomeFirstResponder];
+        self.formVideoInfoIndicator.hidden = TRUE;
     });
 }
 
 -(void)clearTextFieldAlert
 {
     self.youtubeUrlField.placeholder = @"Enter a youtu.be or youtube.com link";
+    self.formVideoInfoIndicator.hidden = YES;
 }
 
 -(NSString *)returnParsedURL: (NSString *)fieldString{
@@ -222,7 +228,13 @@
     }
     else if([fieldString isEqualToString: @"dontfakethefunk!"])
     {
-        [self dontFakeTheFunk];
+        self.youtubeUrlField.text = @"Really?! Why'd you go and do that...";
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.75 * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
+        {
+            [self DontFakeTheFunkError];
+           //[self dontFakeTheFunk];
+        });
         
         return 0;
     }
@@ -269,7 +281,8 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
     {
-       [self.youtubeUrlField becomeFirstResponder];
+        self.youtubeUrlField.text = @"";
+        [self.youtubeUrlField becomeFirstResponder];
     });
 }
 
@@ -325,6 +338,10 @@
     [self.youtubeUrlField setLeftViewMode:UITextFieldViewModeAlways];
     [self.youtubeUrlField setLeftView:spacerView];
     
+    //Activity Indicator
+    self.formVideoInfoIndicator.tintColor = [UIColor colorWithRed:0.792 green:0.792 blue:0.792 alpha:1];
+    self.formVideoInfoIndicator.hidden = YES;
+    
     //Background Image Context
     UIGraphicsBeginImageContext(self.view.frame.size);
     [[UIImage imageNamed:@"background"] drawInRect:self.view.bounds];
@@ -337,29 +354,121 @@
     self.youtubeUrlField.keyboardType = UIKeyboardTypeWebSearch;
     self.youtubeUrlField.returnKeyType = UIReturnKeySend;
     
-    //Keyboard Setup and Actions
-//    UITapGestureRecognizer *dismissKeyboardTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-//                                                                                         action:@selector(dismissKeyboard)];
-//    [self.view addGestureRecognizer:dismissKeyboardTap];
+    [self addTwoFingersSettingTap];
+}
+
+
+#pragma mark - ActionSheet Quality
+
+-(void)addTwoFingersSettingTap
+{
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(popSettingsSheet)];
+    [tapRecognizer setNumberOfTapsRequired:2];
+    [tapRecognizer setNumberOfTouchesRequired:2];
+    [[self view] addGestureRecognizer:tapRecognizer];
+}
+
+-(void)popSettingsSheet
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Download Settings" message:@"" preferredStyle:UIAlertControllerStyleActionSheet];
     
-    NSLog(@"frame width: %f // frame height: %f", self.view.frame.size.height, self.view.frame.size.width);
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action)
+    {
+        [self dismissViewControllerAnimated:YES completion:^{
+        }];
+    }]];
+    
+    if([[defaults objectForKey:@"videoQuality"] isEqualToString:@"hd"])
+    {
+        [actionSheet addAction:[UIAlertAction actionWithTitle:@"Switch to SD" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+        {
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:@"standard" forKey:@"videoQuality"];
+            [defaults synchronize];
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+            }];
+        }]];
+    }
+    else
+    {
+        [actionSheet addAction:[UIAlertAction actionWithTitle:@"Switch to HD" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+        {
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:@"hd" forKey:@"videoQuality"];
+            [defaults synchronize];
+            
+            [self dismissViewControllerAnimated:YES completion:^{
+            }];
+        }]];
+    }
+    
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
--(void)dontFakeTheFunk{
-    self.dontFake = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    UIImageView *dontFakeView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    dontFakeView.image = [UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"dontfakethefunk" withExtension:@"gif"]]];
-    UIButton *closeDontFake = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    [closeDontFake setTitle:@"" forState:UIControlStateNormal];
-    [closeDontFake addTarget:self action:@selector(closeDontFakeTheFunk) forControlEvents:UIControlEventTouchUpInside];
-    [self.dontFake addSubview:dontFakeView];
-    [self.dontFake addSubview:closeDontFake];
-    [self.view addSubview:self.dontFake];
+
+#pragma mark - Dont Fake the Funk!
+
+-(void)DontFakeTheFunkError
+{
+    
+    self.startDontFakeTheFunkTimer = [NSTimer scheduledTimerWithTimeInterval:.10
+                                       target:self
+                                     selector:@selector(timedDontFakeTheFunkMessage)
+                                     userInfo:nil
+                                      repeats:YES];
+    
+    [NSTimer scheduledTimerWithTimeInterval:8.0
+                                     target:self
+                                   selector:@selector(popDontFakeTheFunkView)
+                                   userInfo:nil
+                                    repeats:NO];
 }
 
--(void)closeDontFakeTheFunk{
+-(void)timedDontFakeTheFunkMessage
+{
+    
+    int r = 18 + arc4random() % (32 - 18);
+    self.youtubeUrlField.text = [self randomStringWithLength:r];
+}
+
+-(void)popDontFakeTheFunkView
+{
+    //Clear out silly textfield stuff
+    self.youtubeUrlField.text = @"SASQUATCH(taco) RETURN END";
+    [self.startDontFakeTheFunkTimer invalidate];
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.25 * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
+    {
+        self.dontFake = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        UIImageView *dontFakeView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        dontFakeView.image = [UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"dontfakethefunk" withExtension:@"gif"]]];
+        UIButton *closeDontFake = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+        [closeDontFake setTitle:@"" forState:UIControlStateNormal];
+        [closeDontFake addTarget:self action:@selector(closeDontFakeTheFunk) forControlEvents:UIControlEventTouchUpInside];
+        [self.dontFake addSubview:dontFakeView];
+        [self.dontFake addSubview:closeDontFake];
+        [self.view addSubview:self.dontFake];
+
+    });
+}
+
+-(void)closeDontFakeTheFunk
+{
     [_dontFake removeFromSuperview];
-    [self addTextFieldAlert:@"You silly fuck!" withDelay:.75 andError:YES];
+    self.youtubeUrlField.text = @"";
+    [self showKeyboard];
+}
+
+-(NSString *)randomStringWithLength: (int) len {
+    NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+    NSMutableString *randomString = [NSMutableString stringWithCapacity: len];
+    for (int i=0; i<len; i++) {
+        [randomString appendFormat: @"%C", [letters characterAtIndex: arc4random_uniform([letters length])]];
+    }
+    
+    return randomString;
 }
 
 

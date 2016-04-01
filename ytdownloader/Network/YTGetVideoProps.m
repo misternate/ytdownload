@@ -43,16 +43,7 @@
     failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {
         completion(NO);
-        
-        if(error.code == -1001)
-        {
-            
-        }
-        
-        else
-        {
-            
-        }
+
     }];
 }
 
