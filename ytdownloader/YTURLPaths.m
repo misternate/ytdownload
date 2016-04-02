@@ -23,7 +23,7 @@ NSString * const YOUTUBE_GETVIDEO_URL = @"https://ytdownloader.herokuapp.com/get
     }
     else
     {
-        quality = @"ipad";
+        quality = @"iOS";
     }
     NSString *videoPropsURL = [NSString stringWithFormat:@"%@%@&format=%@", YOUTUBE_GETVIDEO_URL, videoId, quality];
     NSLog(@"videoPropsURL: %@", videoPropsURL);

@@ -232,8 +232,7 @@
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.75 * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
         {
-            [self DontFakeTheFunkError];
-           //[self dontFakeTheFunk];
+            [self DontFakeTheFunkErrorKickOff];
         });
         
         return 0;
@@ -410,7 +409,7 @@
 
 #pragma mark - Dont Fake the Funk!
 
--(void)DontFakeTheFunkError
+-(void)DontFakeTheFunkErrorKickOff
 {
     
     self.startDontFakeTheFunkTimer = [NSTimer scheduledTimerWithTimeInterval:.10

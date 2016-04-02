@@ -54,8 +54,6 @@
         
         [manager setDownloadTaskDidWriteDataBlock:^(NSURLSession * _Nonnull session, NSURLSessionDownloadTask * _Nonnull downloadTask, int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite)
          {
-             //self.percentageOfFileDownloaded = (float)totalBytesWritten / (float)totalBytesExpectedToWrite;
-             
              NSLog(@"%lld, %lld", totalBytesWritten, totalBytesExpectedToWrite);
              
              if(totalBytesWritten == totalBytesExpectedToWrite)
@@ -63,9 +61,6 @@
                  YTUrlInputVC *urlInputVC = [[YTUrlInputVC alloc] init];
                  urlInputVC.youtubeUrlField.text = @"downloaded.";
              }
-             //NSLog(@"P: %@", self.percentageOfFileDownloaded);
-             
-             //[self setPercentageOfFileDownloaded: [[NSNumber numberWithFloat:(float)totalBytesWritten / (float)totalBytesExpectedToWrite] stringValue]];
          }];
         [downloadTask resume];
     }
