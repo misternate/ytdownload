@@ -7,6 +7,7 @@
 //
 
 #import "YTAppDelegate.h"
+#import <HockeySDK/HockeySDK.h>
 
 @interface YTAppDelegate ()
 
@@ -18,6 +19,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     application.statusBarHidden = YES;
+    
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"8a64f2d31e4a42bb86050b5914a90ac5"];
+    [[BITHockeyManager sharedHockeyManager] startManager];
+    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
+
     return YES;
 }
 

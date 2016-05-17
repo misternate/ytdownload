@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		417C2F95E0898B323726E4CE /* libPods-ytdownloader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5AEE03B1303A77300D8C216 /* libPods-ytdownloader.a */; };
+		431602781CEACC4500547A49 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 431602761CEACC4500547A49 /* LaunchScreen.storyboard */; };
 		4366E8281C95E71900928EED /* YTURLPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 4366E8271C95E71900928EED /* YTURLPaths.m */; };
 		4366E82B1C95F3F700928EED /* YTDownloadVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4366E82A1C95F3F700928EED /* YTDownloadVideo.m */; };
 		4366E82E1C96018200928EED /* YTVideoPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4366E82D1C96018200928EED /* YTVideoPreviewVC.m */; };
@@ -15,7 +16,6 @@
 		439CA6161C71116B004BEEB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CA6151C71116B004BEEB4 /* main.m */; };
 		439CA6191C71116B004BEEB4 /* YTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CA6181C71116B004BEEB4 /* YTAppDelegate.m */; };
 		439CA61F1C71116B004BEEB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439CA61D1C71116B004BEEB4 /* Main.storyboard */; };
-		439CA6241C71116B004BEEB4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439CA6221C71116B004BEEB4 /* LaunchScreen.storyboard */; };
 		439CA62F1C71116B004BEEB4 /* ytdownloaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CA62E1C71116B004BEEB4 /* ytdownloaderTests.m */; };
 		439CA63A1C71116B004BEEB4 /* ytdownloaderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CA6391C71116B004BEEB4 /* ytdownloaderUITests.m */; };
 		439CA6491C711386004BEEB4 /* YTUrlInputVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CA6481C711386004BEEB4 /* YTUrlInputVC.m */; };
@@ -44,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		05993837F063ED82794165AC /* Pods-ytdownloader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ytdownloader.release.xcconfig"; path = "Pods/Target Support Files/Pods-ytdownloader/Pods-ytdownloader.release.xcconfig"; sourceTree = "<group>"; };
+		431602771CEACC4500547A49 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4366E8261C95E71900928EED /* YTURLPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTURLPaths.h; sourceTree = "<group>"; };
 		4366E8271C95E71900928EED /* YTURLPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTURLPaths.m; sourceTree = "<group>"; };
 		4366E8291C95F3F700928EED /* YTDownloadVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTDownloadVideo.h; sourceTree = "<group>"; };
@@ -57,7 +58,6 @@
 		439CA6171C71116B004BEEB4 /* YTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YTAppDelegate.h; sourceTree = "<group>"; };
 		439CA6181C71116B004BEEB4 /* YTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YTAppDelegate.m; sourceTree = "<group>"; };
 		439CA61E1C71116B004BEEB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		439CA6231C71116B004BEEB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		439CA6251C71116B004BEEB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		439CA62A1C71116B004BEEB4 /* ytdownloaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ytdownloaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		439CA62E1C71116B004BEEB4 /* ytdownloaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ytdownloaderTests.m; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 				439CA6181C71116B004BEEB4 /* YTAppDelegate.m */,
 				439CA64A1C7113FB004BEEB4 /* App */,
 				439CA61D1C71116B004BEEB4 /* Main.storyboard */,
-				439CA6221C71116B004BEEB4 /* LaunchScreen.storyboard */,
+				431602761CEACC4500547A49 /* LaunchScreen.storyboard */,
 				439CA6251C71116B004BEEB4 /* Info.plist */,
 				43EBEAED1CA1864100F78466 /* Assets.xcassets */,
 				43F6A50B1CA90ACE00422400 /* dontfakethefunk.gif */,
@@ -249,6 +249,7 @@
 				439CA60E1C71116B004BEEB4 /* Frameworks */,
 				439CA60F1C71116B004BEEB4 /* Resources */,
 				C84B224FC066E714FB7AD666 /* Copy Pods Resources */,
+				8085531693EB6541677139A5 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -343,7 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43F6A50C1CA90ACE00422400 /* dontfakethefunk.gif in Resources */,
-				439CA6241C71116B004BEEB4 /* LaunchScreen.storyboard in Resources */,
+				431602781CEACC4500547A49 /* LaunchScreen.storyboard in Resources */,
 				43EBEAEE1CA1864100F78466 /* Assets.xcassets in Resources */,
 				439CA61F1C71116B004BEEB4 /* Main.storyboard in Resources */,
 			);
@@ -379,6 +380,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8085531693EB6541677139A5 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ytdownloader/Pods-ytdownloader-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C84B224FC066E714FB7AD666 /* Copy Pods Resources */ = {
@@ -447,20 +463,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		431602761CEACC4500547A49 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				431602771CEACC4500547A49 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		439CA61D1C71116B004BEEB4 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				439CA61E1C71116B004BEEB4 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		439CA6221C71116B004BEEB4 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				439CA6231C71116B004BEEB4 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -552,6 +568,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ytdownloader/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oso.ytdownloader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -564,6 +581,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ytdownloader/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oso.ytdownloader;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -51,6 +51,11 @@
                                             object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(downloadFailed:)
+                                                 name:@"downloadFailed"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(downloadStarted:)
                                                  name:@"downloadStarted"
                                                object:nil];
@@ -65,6 +70,10 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:@"downloadComplete"
+                                                  object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:@"downloadFailed"
                                                   object:nil];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self
@@ -100,6 +109,12 @@
 {
     [SVProgressHUD setMinimumDismissTimeInterval:1.0];
     [SVProgressHUD showSuccessWithStatus:@"Download Complete"];
+}
+
+-(void)downloadFailed:(NSNotification *)note
+{
+    [SVProgressHUD setMinimumDismissTimeInterval:1.0];
+    [SVProgressHUD showErrorWithStatus:@"Download Failed: Restricted Video"];
 }
 
 -(void)downloadHUDDismissed: (NSNotification *)note

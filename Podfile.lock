@@ -20,6 +20,9 @@ PODS:
   - AFNetworking/UIKit (2.6.3):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - HockeySDK (4.0.1):
+    - HockeySDK/AllFeaturesLib (= 4.0.1)
+  - HockeySDK/AllFeaturesLib (4.0.1)
   - IQKeyboardManager (4.0.0)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
@@ -28,14 +31,16 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.6.0)
+  - HockeySDK (~> 4.0)
   - IQKeyboardManager
   - SDWebImage (~> 3.7)
   - SVProgressHUD
 
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  HockeySDK: 1b69a82782f6a3d4a1c0b1f04dca4bca83fc8c82
   IQKeyboardManager: b91928f7927ba55a5829b4dcf4b7a6736ac9fc22
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SVProgressHUD: e9e7c893686a20da55a28015ed384d9425e15479
 
-COCOAPODS: 0.38.2
+COCOAPODS: 0.39.0

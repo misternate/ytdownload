@@ -40,16 +40,25 @@
           }
             completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error)
           {
-              //Write file to photo album
-              ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
-              [assetLibrary writeVideoAtPathToSavedPhotosAlbum:filePath completionBlock:^(NSURL *assetURL, NSError *error)
-               {
-                   NSError *removeError = nil;
-                   //Cleanup file in local directory
-                   [[NSFileManager defaultManager] removeItemAtURL:filePath error:&removeError];
-                   //Post DL complete notification
-                   [[NSNotificationCenter defaultCenter] postNotificationName:@"downloadComplete" object:nil userInfo:videoDictionary];
-               }];
+              
+              if(!error.code)
+              {
+                  //Write file to photo album
+                  ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
+                  [assetLibrary writeVideoAtPathToSavedPhotosAlbum:filePath completionBlock:^(NSURL *assetURL, NSError *error)
+                   {
+                       NSError *removeError = nil;
+                       //Cleanup file in local directory
+                       [[NSFileManager defaultManager] removeItemAtURL:filePath error:&removeError];
+                       //Post DL complete notification
+                       [[NSNotificationCenter defaultCenter] postNotificationName:@"downloadComplete" object:nil userInfo:videoDictionary];
+                   }];
+              }
+              else
+              {
+                  [[NSNotificationCenter defaultCenter] postNotificationName:@"downloadFailed" object:nil userInfo:videoDictionary];
+              }
+              
           }];
         
         [manager setDownloadTaskDidWriteDataBlock:^(NSURLSession * _Nonnull session, NSURLSessionDownloadTask * _Nonnull downloadTask, int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite)

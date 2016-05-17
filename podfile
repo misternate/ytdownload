@@ -3,4 +3,5 @@ target 'ytdownloader' do
   pod 'SVProgressHUD'
   pod 'SDWebImage', '~> 3.7'
   pod 'IQKeyboardManager'
+  pod 'HockeySDK', '~> 4.0'
 end
