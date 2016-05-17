@@ -23,7 +23,6 @@
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *formVideoInfoIndicator;
 @property (nonatomic) YTGetVideoProps *ytGetVideo;
 @property (strong, nonatomic) IBOutlet UIProgressView *downloadProgressView;
-@property (strong, nonatomic) IBOutlet UIButton *getVideoButton;
 @property (nonatomic) NSTimer *startDontFakeTheFunkTimer;
 
 @end
@@ -36,7 +35,6 @@
     self.youtubeUrlField.delegate = self;
     
     self.formHelperLabel.hidden = YES;
-    self.getVideoButton.hidden = YES;
     
     
     [self getPermissions];
@@ -93,8 +91,8 @@
     NSString *videoTitle = [self returnShortVideoTitle:[[note userInfo] valueForKey:@"video_title"]];
     
     NSString *videoDownloadingWithTitle = [NSString stringWithFormat:@"Downloading\r%@", videoTitle];
-    NSData *videoThumbnailData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: [NSString stringWithFormat:[[note userInfo] valueForKey:@"video_thumbnail"]]]];
-    
+    NSString *thumbnailPath = [[note userInfo] valueForKey:@"video_thumbnail"];
+    NSData *videoThumbnailData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: thumbnailPath]];
     UIImage *videoThumbnail = [[UIImage alloc] initWithData:videoThumbnailData];
 
     [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
