@@ -9,14 +9,16 @@
 #import "YTUrlInputVC.h"
 #import "YTDownloadVideo.h"
 #import "UIImage+animatedGIF.h"
-
 #import <Photos/Photos.h>
+#import <AVFoundation/AVFoundation.h>
 #import <AFNetworking.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <SVProgressHUD.h>
 #import <IQKeyboardManager.h>
 
-@interface YTUrlInputVC ()
+@interface YTUrlInputVC (){
+    AVAudioPlayer* audioPlayer;
+}
 @property (nonatomic) UIView *dontFake;
 @property (strong, nonatomic) IBOutlet UILabel *formHeaderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *formHelperLabel;
@@ -24,6 +26,7 @@
 @property (nonatomic) YTGetVideoProps *ytGetVideo;
 @property (strong, nonatomic) IBOutlet UIProgressView *downloadProgressView;
 @property (nonatomic) NSTimer *startDontFakeTheFunkTimer;
+@property (nonatomic) BOOL blinkStatus;
 
 @end
 
@@ -431,7 +434,7 @@
                                      userInfo:nil
                                       repeats:YES];
     
-    [NSTimer scheduledTimerWithTimeInterval:8.0
+    [NSTimer scheduledTimerWithTimeInterval:3.0
                                      target:self
                                    selector:@selector(popDontFakeTheFunkView)
                                    userInfo:nil
@@ -450,9 +453,18 @@
     //Clear out silly textfield stuff
     self.youtubeUrlField.text = @"SASQUATCH(taco) RETURN END";
     [self.startDontFakeTheFunkTimer invalidate];
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.25 * NSEC_PER_SEC));
+    
+    NSTimer *blinkTimer = [NSTimer
+                      scheduledTimerWithTimeInterval:(NSTimeInterval)(.25)
+                      target:self
+                      selector:@selector(blink)
+                      userInfo:nil
+                      repeats:TRUE];
+    
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.00 * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
     {
+        [blinkTimer invalidate];
         self.dontFake = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         UIImageView *dontFakeView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         dontFakeView.image = [UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"dontfakethefunk" withExtension:@"gif"]]];
@@ -462,12 +474,24 @@
         [self.dontFake addSubview:dontFakeView];
         [self.dontFake addSubview:closeDontFake];
         [self.view addSubview:self.dontFake];
-
+        [self playHey];
     });
+}
+
+-(void)playHey
+{
+    NSString *path = [NSString stringWithFormat:@"%@/hey.mp3", [[NSBundle mainBundle] resourcePath]];
+    NSURL *soundUrl = [NSURL fileURLWithPath:path];
+    
+    audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:soundUrl error:nil];
+    audioPlayer.numberOfLoops = -1;
+    [audioPlayer prepareToPlay];
+    [audioPlayer play];
 }
 
 -(void)closeDontFakeTheFunk
 {
+    [audioPlayer stop];
     [_dontFake removeFromSuperview];
     self.youtubeUrlField.text = @"";
     [self showKeyboard];
@@ -481,6 +505,16 @@
     }
     
     return randomString;
+}
+
+-(void)blink{
+    if(self.blinkStatus == NO){
+        self.youtubeUrlField.text = @" ";
+        self.blinkStatus = YES;
+    }else {
+        self.youtubeUrlField.text = @"SASQUATCH(taco) RETURN END";
+        self.blinkStatus = NO;
+    }
 }
 
 

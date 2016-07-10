@@ -13,6 +13,7 @@
 		4366E82B1C95F3F700928EED /* YTDownloadVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 4366E82A1C95F3F700928EED /* YTDownloadVideo.m */; };
 		4366E82E1C96018200928EED /* YTVideoPreviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4366E82D1C96018200928EED /* YTVideoPreviewVC.m */; };
 		4366E8351C96799E00928EED /* YTVideoDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4366E8341C96799E00928EED /* YTVideoDataModel.m */; };
+		4388DE1D1D30A45C003EEAB1 /* hey.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4388DE1C1D30A45C003EEAB1 /* hey.mp3 */; };
 		439CA6161C71116B004BEEB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CA6151C71116B004BEEB4 /* main.m */; };
 		439CA6191C71116B004BEEB4 /* YTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 439CA6181C71116B004BEEB4 /* YTAppDelegate.m */; };
 		439CA61F1C71116B004BEEB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 439CA61D1C71116B004BEEB4 /* Main.storyboard */; };
@@ -53,6 +54,7 @@
 		4366E82D1C96018200928EED /* YTVideoPreviewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTVideoPreviewVC.m; sourceTree = "<group>"; };
 		4366E8331C96799E00928EED /* YTVideoDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTVideoDataModel.h; sourceTree = "<group>"; };
 		4366E8341C96799E00928EED /* YTVideoDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTVideoDataModel.m; sourceTree = "<group>"; };
+		4388DE1C1D30A45C003EEAB1 /* hey.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = hey.mp3; sourceTree = "<group>"; };
 		439CA6111C71116B004BEEB4 /* ytdownloader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ytdownloader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		439CA6151C71116B004BEEB4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		439CA6171C71116B004BEEB4 /* YTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YTAppDelegate.h; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				431602761CEACC4500547A49 /* LaunchScreen.storyboard */,
 				439CA6251C71116B004BEEB4 /* Info.plist */,
 				43EBEAED1CA1864100F78466 /* Assets.xcassets */,
+				4388DE1C1D30A45C003EEAB1 /* hey.mp3 */,
 				43F6A50B1CA90ACE00422400 /* dontfakethefunk.gif */,
 				439CA6141C71116B004BEEB4 /* Supporting Files */,
 			);
@@ -345,6 +348,7 @@
 			files = (
 				43F6A50C1CA90ACE00422400 /* dontfakethefunk.gif in Resources */,
 				431602781CEACC4500547A49 /* LaunchScreen.storyboard in Resources */,
+				4388DE1D1D30A45C003EEAB1 /* hey.mp3 in Resources */,
 				43EBEAEE1CA1864100F78466 /* Assets.xcassets in Resources */,
 				439CA61F1C71116B004BEEB4 /* Main.storyboard in Resources */,
 			);

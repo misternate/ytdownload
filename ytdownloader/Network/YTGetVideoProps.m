@@ -31,12 +31,6 @@
         YTVideoDataModel *videoDataModel = [YTVideoDataModel getInstance];
         [videoDataModel setVideoModel:videoResponseObject];
         
-        
-//        YTVideoModel *videoModel = [[YTVideoModel alloc] init];
-//        videoModel.video_file = [NSURL URLWithString: [[videoResponseObject valueForKey:@"video_file"] objectAtIndex:0]];
-//        videoModel.video_thumbnail = [[videoResponseObject valueForKey:@"video_file"] objectAtIndex:0];
-//        videoModel.video_title = [[videoResponseObject valueForKey:@"video_title"] objectAtIndex: 0];
-        
         completion(YES);
         
     }
