@@ -33,7 +33,7 @@ DEPENDENCIES:
   - AFNetworking (~> 2.6.0)
   - HockeySDK (~> 4.0)
   - IQKeyboardManager
-  - SDWebImage (~> 3.7)
+  - SDWebImage
   - SVProgressHUD
 
 SPEC CHECKSUMS:
@@ -43,4 +43,6 @@ SPEC CHECKSUMS:
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SVProgressHUD: e9e7c893686a20da55a28015ed384d9425e15479
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: a5073e6d1e3c5afa38f47cb20f83bd67d5360e20
+
+COCOAPODS: 1.1.1
